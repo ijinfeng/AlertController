@@ -73,6 +73,16 @@ static inline BOOL isIphonex_s() {
     self.view.layer.mask = shape;
 }
 
+- (UIColor *)renderColorWithAction:(PopoAlertAction *)action {
+    if (action.actionStyle == PopoAlertActionStyleForbid) {
+        return [UIColor lightGrayColor];
+    } else if (action.actionStyle == PopoAlertActionStyleDestructive) {
+        return [UIColor redColor];
+    } else {
+        return [UIColor blackColor];
+    }
+}
+
 #pragma mark - UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -92,7 +102,7 @@ static inline BOOL isIphonex_s() {
     if (indexPath.section == 0) {
         PopoAlertAction *action = self.actions_[indexPath.row];
         cell.titleLabel.text = action.title;
-        cell.titleLabel.textColor = [action renderColor];
+        cell.titleLabel.textColor = [self renderColorWithAction:action];
         if (self.message_.length == 0
             && indexPath.row == 0) {
             cell.showTopLine = NO;

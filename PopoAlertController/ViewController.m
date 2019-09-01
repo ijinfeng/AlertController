@@ -79,6 +79,8 @@
     PopoAlertMaker.custom([AlertViewController new]).
     addCustomAction(@"自定义参数", @{@"cmd":@"111"}, ^{
         NSLog(@"点击自定义参数");
+    }).addCustomAction(@"参数", nil, ^{
+        
     }).
     addDefaultAction(@"点我", ^{
         NSLog(@"点我，e呵呵哒");

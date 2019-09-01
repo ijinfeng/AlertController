@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class PopoAlertMaker, UIViewController, PopoAlertAction;
 typedef PopoAlertMaker * _Nonnull(^PopoActionBlock)(NSString *, void(^ _Nullable )(void));
-typedef PopoAlertMaker * _Nonnull(^PopoCustomActionBlock)(NSString *, id object, void(^ _Nullable )(void));
+typedef PopoAlertMaker * _Nonnull(^PopoCustomActionBlock)(NSString *, id _Nullable object, void(^ _Nullable )(void));
 typedef PopoAlertMaker * _Nonnull(^PopoAlertTitle)(NSString *);
 @interface PopoAlertMaker : NSObject
 
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSInteger, PopoAlertActionStyle) {
     PopoAlertActionStyleCancel,
     PopoAlertActionStyleCustom,
 };
-@class UIColor;
+
 @interface PopoAlertAction : NSObject
 
 @property (nonatomic, copy) void(^action)(void);
@@ -69,8 +69,6 @@ typedef NS_ENUM(NSInteger, PopoAlertActionStyle) {
 @property (nonatomic, strong, nullable) id object;
 
 @property (nonatomic) PopoAlertActionStyle actionStyle;
-
-- (UIColor *)renderColor;
 
 @end
 

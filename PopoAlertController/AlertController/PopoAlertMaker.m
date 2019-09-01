@@ -211,16 +211,6 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
 
 @implementation PopoAlertAction
 
-- (UIColor *)renderColor {
-    if (_actionStyle == PopoAlertActionStyleForbid) {
-        return [UIColor lightGrayColor];
-    } else if (_actionStyle == PopoAlertActionStyleDestructive) {
-        return [UIColor redColor];
-    } else {
-        return [UIColor blackColor];
-    }
-}
-
 @end
 
 
