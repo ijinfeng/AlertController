@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class PopoAlertMaker, UIViewController, PopoAlertAction;
 typedef PopoAlertMaker * _Nonnull(^PopoActionBlock)(NSString *, void(^ _Nullable )(void));
-typedef PopoAlertMaker * _Nonnull(^PopoCustomActionBlock)(NSString *, NSDictionary *userInfo, void(^ _Nullable )(void));
+typedef PopoAlertMaker * _Nonnull(^PopoCustomActionBlock)(NSString *, id object, void(^ _Nullable )(void));
 typedef PopoAlertMaker * _Nonnull(^PopoAlertTitle)(NSString *);
 @interface PopoAlertMaker : NSObject
 
@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, PopoAlertActionStyle) {
 
 @property (nonatomic, copy) NSString *title;
 
-@property (nonatomic, strong, nullable) NSDictionary *userInfo;
+@property (nonatomic, strong, nullable) id object;
 
 @property (nonatomic) PopoAlertActionStyle actionStyle;
 
@@ -77,6 +77,8 @@ typedef NS_ENUM(NSInteger, PopoAlertActionStyle) {
 
 
 @interface UIViewController (PopoAlertPresent)
+
+@property (nonatomic, strong, readonly) PopoAlertMaker *popo_alertMaker;
 
 - (PopoAlertMaker *)popo_presentFrom:(UIViewController *)from;
 /// 先dismiss再present

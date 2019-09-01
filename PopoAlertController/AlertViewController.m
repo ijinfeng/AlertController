@@ -39,7 +39,7 @@
     self = [super init];
     if (self) {
         for (PopoAlertAction *action in actions) {
-            NSLog(@"title:%@|userInfo:%@",action.title,action.userInfo);
+            NSLog(@"title:%@|object:%@",action.title,action.object);
         }
     }
     return self;

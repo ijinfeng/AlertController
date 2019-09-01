@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, PopoAlertAnimation) {
     PopoAlertAnimationPopAlert,
     /// animation like system sheet
     PopoAlertAnimationSheet,
+    PopoAlertAnimationPullDown,
 };
 
 NS_ASSUME_NONNULL_BEGIN

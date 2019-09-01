@@ -8,6 +8,7 @@
 
 #import "PopoAlertMaker.h"
 #import "PopoSheetViewController.h"
+#import <objc/runtime.h>
 
 static const float kPresentDelay = 0.3;
 
@@ -175,6 +176,10 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
         CGRect rect = finalFrame;
         rect.origin.y = rect.origin.y + finalFrame.size.height;
         initialFrame = rect;
+    } else if (animation == PopoAlertAnimationPullDown) {
+        CGRect rect = finalFrame;
+        rect.origin.y = rect.origin.y - finalFrame.size.height;
+        initialFrame = rect;
     }
     
     if (presenting) {
@@ -338,11 +343,11 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
 }
 
 - (PopoCustomActionBlock)addCustomAction {
-    PopoAlertMaker *(^maker)(NSString *,NSDictionary *, void(^)(void)) = ^PopoAlertMaker *(NSString *x, NSDictionary *u, void(^b)(void)) {
+    PopoAlertMaker *(^maker)(NSString *,id, void(^)(void)) = ^PopoAlertMaker *(NSString *x, id obj, void(^b)(void)) {
         PopoAlertAction *a = [[PopoAlertAction alloc] init];
         a.title = x;
         a.action = b;
-        a.userInfo = u;
+        a.object = obj;
         a.actionStyle = PopoAlertActionStyleCustom;
         [self.actions addObject:a];
         return self;
@@ -428,6 +433,7 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
 
 @end
 
+#pragma mark - Custom
 
 @implementation PopoAlertMaker (PopoAlertCustom)
 
@@ -440,11 +446,21 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
 
 @end
 
+#pragma mark - Controller Present caegory
 
 @implementation UIViewController (PopoAlertPresent)
 
+- (PopoAlertMaker *)popo_alertMaker {
+    PopoAlertMaker *maker = objc_getAssociatedObject(self, _cmd);
+    if (!maker) {
+        maker = [[PopoAlertMaker alloc] initWithAlertStyle:PopoAlertControllerStyleCustom custom:(id<PopoAlertContentProtocol>)self];
+        objc_setAssociatedObject(self, _cmd, maker, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return maker;
+}
+
 - (PopoAlertMaker *)popo_presentFrom:(UIViewController *)from {
-    PopoAlertMaker *maker =  PopoAlertMaker.custom((id<PopoAlertContentProtocol>)self);
+    PopoAlertMaker *maker = self.popo_alertMaker;
     maker.presentFrom(from);
     return maker;
 }
