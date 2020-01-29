@@ -7,8 +7,8 @@
 //
 
 #import "PopoAlertMaker.h"
-#import "PopoSheetViewController.h"
 #import <objc/runtime.h>
+#import <UIKit/UIKit.h>
 
 static const float kPresentDelay = 0.3;
 
