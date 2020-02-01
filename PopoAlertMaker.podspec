@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |spec|
 
-  spec.name         = "IAAlertMaker"
-  spec.version      = "1.1.0"
+  spec.name         = "PopoAlertMaker"
+  spec.version      = "1.1.1"
   spec.summary      = "轻量级弹框创建工具"
   spec.description  = "链式alert、sheet以及自定义轻量级弹框创建"
   spec.homepage     = "https://github.com/CranzCapatain/AlertController"
