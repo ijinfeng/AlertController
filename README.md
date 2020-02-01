@@ -51,3 +51,7 @@ PopoAlertMaker.sheet.title(@"弹框Sheet").message(@"描述").addDestructiveActi
 ```
 PopoAlertMaker.custom([AlertViewController new]).dimissTapOnTemp(YES).presentFrom(self);
 ```
+
+### 通过Cocoapods安装
+* 在podfile文件中添加 `pod 'PopoAlertMaker'`
+* pod install
