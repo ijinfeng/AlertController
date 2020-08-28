@@ -34,7 +34,11 @@ typedef PopoAlertMaker * _Nonnull(^PopoAlertTitle)(NSString *);
 /// 添加自动义操作，可以传递自定义的参数进去，实现复杂的弹框
 @property (nonatomic, copy, readonly) PopoCustomActionBlock addCustomAction;
 
+<<<<<<< HEAD
 @property (nonatomic, copy, readonly) void (^presentFrom)(id viewOrViewController);
+=======
+@property (nonatomic, copy, readonly) void (^presentFrom)(UIViewController *);
+>>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 
 @end
 
@@ -46,8 +50,12 @@ typedef PopoAlertMaker * _Nonnull(^PopoAlertCustom)(id<PopoAlertContentProtocol>
 @property (nonatomic, copy, readonly, class) PopoAlertCustom custom;
 /// 点击空白处是否dismissm，注意只有设置为custom的弹框才有效
 @property (nonatomic, copy, readonly) PopoAlertMaker * _Nonnull(^dimissTapOnTemp)(BOOL);
+<<<<<<< HEAD
 /// 弹框展示的动画类型，默认是‘PopoAlertAnimationStyleAlert’类型
 @property (nonatomic, copy, readonly) PopoAlertMaker * _Nonnull(^animationStyle)(PopoAlertAnimation);
+=======
+
+>>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 @end
 
 
@@ -82,6 +90,7 @@ typedef NS_ENUM(NSInteger, PopoAlertActionStyle) {
 - (PopoAlertMaker *)popo_presentFrom:(UIViewController *)from;
 /// 先dismiss再present
 - (void)popo_dismissToPresent:(void(^)(UIViewController *p))present;
+<<<<<<< HEAD
 /// 当present的自定义的弹窗需要更新其视图frame的时候调用这个方法，会重新调用`- (CGRect)frameForViewContent`
 - (void)popo_setNeedsUpdateFrameOfContentViewWithAnimate:(BOOL)animate;
 
@@ -100,6 +109,8 @@ typedef NS_ENUM(NSInteger, PopoAlertActionStyle) {
 #pragma mark - Custom IMP
 
 @interface PopoAlertMaker (PopoCustomImpl)
+=======
+>>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 
 @end
 

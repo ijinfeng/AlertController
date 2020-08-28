@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// default is 0.25s
 - (NSTimeInterval)animationDuration;
+<<<<<<< HEAD
 
 /// is set animate YES, default 0.25
 - (NSTimeInterval)setNeedsUpdateFrameAnimationDuration;
@@ -51,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// called when alert remove from superview
 - (void)alertDidDismiss;
 
+=======
+>>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 @end
 
 NS_ASSUME_NONNULL_END
