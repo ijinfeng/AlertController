@@ -1,19 +1,3 @@
-//
-//  PopoAlertMaker.m
-<<<<<<< HEAD
-//  YunJiBuyer
-//
-//  Created by JinFeng on 2019/6/3.
-//  Copyright © 2019 浙江集商优选电子商务有限公司. All rights reserved.
-//
-
-#import "PopoAlertMaker.h"
-#import <UIKit/UIKit.h>
-#import <objc/runtime.h>
-
-static const float kPresentDelay = 0.3;
-static const void *kSetNeedsUpdateFrameKey = &kSetNeedsUpdateFrameKey;
-=======
 //  PopoAlertController
 //
 //  Created by JinFeng on 2019/4/23.
@@ -25,7 +9,7 @@ static const void *kSetNeedsUpdateFrameKey = &kSetNeedsUpdateFrameKey;
 #import <UIKit/UIKit.h>
 
 static const float kPresentDelay = 0.3;
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
+static const void *kSetNeedsUpdateFrameKey = &kSetNeedsUpdateFrameKey;
 
 typedef NS_ENUM(int, PopoAlertControllerStyle) {
     PopoAlertControllerStyleAlert,
@@ -39,11 +23,8 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
 
 @property (nonatomic, assign) BOOL dismissTapOnTemp;
 
-<<<<<<< HEAD
 @property (nonatomic, assign) PopoAlertAnimation animationStyle;
 
-=======
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 - (instancetype)initWithPresentedViewController:(UIViewController *)presentedViewController
                        presentingViewController:(nullable UIViewController *)presentingViewController
                                           style:(PopoAlertControllerStyle)style;
@@ -62,29 +43,18 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
     if (self) {
         _style = style;
         _dismissTapOnTemp = NO;
-<<<<<<< HEAD
         _animationStyle = PopoAlertAnimationPopAlert;
-=======
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
         presentedViewController.modalPresentationStyle = UIModalPresentationCustom;
     }
     return self;
 }
 
 - (void)presentationTransitionWillBegin {
-<<<<<<< HEAD
     UIViewController *customAlert = self.presentedViewController;
     UIColor *backgroundColor = [UIColor blackColor];
     if ([customAlert conformsToProtocol:@protocol(PopoAlertContentProtocol)]
         && [customAlert respondsToSelector:@selector(animationTransitionColor)]) {
         backgroundColor = [(id<PopoAlertContentProtocol>)customAlert animationTransitionColor];
-=======
-    UIViewController *toVC = self.presentedViewController;
-    UIColor *backgroundColor = [UIColor blackColor];
-    if ([toVC conformsToProtocol:@protocol(PopoAlertContentProtocol)]
-        && [toVC respondsToSelector:@selector(animationTransitionColor)]) {
-        backgroundColor = [(id<PopoAlertContentProtocol>)toVC animationTransitionColor];
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
     }
     
     self.backgroundView = [[UIView alloc] initWithFrame:self.containerView.bounds];
@@ -101,13 +71,9 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
     [self.presentingViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self.backgroundView.alpha = 0.4;
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-<<<<<<< HEAD
         if ([customAlert respondsToSelector:@selector(alertDidShow)]) {
             [((id<PopoAlertContentProtocol>)customAlert) alertDidShow];
         }
-=======
-        
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
     }];
 }
 
@@ -116,7 +82,6 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
 }
 
 - (void)dismissalTransitionWillBegin {
-<<<<<<< HEAD
     UIViewController *customAlert = self.presentedViewController;
     [self.presentingViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         self.backgroundView.alpha = 0;
@@ -124,12 +89,6 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
         if ([customAlert respondsToSelector:@selector(alertDidShow)]) {
             [((id<PopoAlertContentProtocol>)customAlert) alertDidShow];
         }
-=======
-    [self.presentingViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self.backgroundView.alpha = 0;
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
     }];
 }
 
@@ -145,7 +104,6 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
     if ([toVC conformsToProtocol:@protocol(PopoAlertContentProtocol)]
         && [toVC respondsToSelector:@selector(frameForViewContent)]) {
         CGRect rect = [(id<PopoAlertContentProtocol>)toVC frameForViewContent];
-<<<<<<< HEAD
         BOOL animate = [objc_getAssociatedObject(toVC, kSetNeedsUpdateFrameKey) boolValue];
         NSTimeInterval duration = 0;
         if (animate) {
@@ -160,9 +118,6 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
             toVC.view.frame = rect;
         }];
         objc_setAssociatedObject(self, kSetNeedsUpdateFrameKey, @(NO), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-=======
-        toVC.view.frame = rect;
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
     }
 }
 
@@ -213,11 +168,7 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
     
     // begin animation
     CGRect finalFrame = CGRectZero, initialFrame = CGRectZero;
-<<<<<<< HEAD
     PopoAlertAnimation animation = self.animationStyle;
-=======
-    PopoAlertAnimation animation = PopoAlertAnimationPopAlert;
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
     if ([alertVC conformsToProtocol:@protocol(PopoAlertContentProtocol)]) {
         if ([alertVC respondsToSelector:@selector(alertAnimation)]) {
             animation = [(id<PopoAlertContentProtocol>)alertVC alertAnimation];
@@ -275,7 +226,6 @@ typedef NS_ENUM(int, PopoAlertControllerStyle) {
 
 @end
 
-<<<<<<< HEAD
 #pragma mark - View Transition
 
 static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransitionKey";
@@ -446,8 +396,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
 @end
 
 
-=======
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 #pragma mark - Alert Action
 
 @implementation PopoAlertAction
@@ -471,34 +419,24 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
 
 @property (nonatomic) BOOL dimissTapOnTemp_;
 
-<<<<<<< HEAD
 @property (nonatomic) PopoAlertAnimation animationStyle_;
 
-=======
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 @property (nonatomic, strong) NSMutableArray *actions;
 
 @property (nonatomic, strong) PopoPresentTransition *presentTransition;
 
-<<<<<<< HEAD
 @property (nonatomic, strong) PopoAlertViewTransition *viewTransition;
 
 @property (nonatomic, strong) id<PopoAlertContentProtocol> customAlert;
-=======
-@property (nonatomic, strong) id<PopoAlertContentProtocol> viewController;
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 
 @end
 
 @implementation PopoAlertMaker
 
-<<<<<<< HEAD
 - (void)dealloc {
     NSLog(@"PopoAlertMaker dealloc");
 }
 
-=======
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 - (NSMutableArray *)actions {
     if (!_actions) {
         _actions = [NSMutableArray array];
@@ -518,20 +456,12 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
     return [self initWithAlertStyle:style custom:nil];
 }
 
-<<<<<<< HEAD
 - (instancetype)initWithAlertStyle:(PopoAlertControllerStyle)style custom:(id<PopoAlertContentProtocol>)customAlert {
     if (self = [super init]) {
         _alertStyle = style;
         _customAlert = customAlert;
         _dimissTapOnTemp_ = style == PopoAlertControllerStyleSheet;
         _animationStyle_ = PopoAlertAnimationPopAlert;
-=======
-- (instancetype)initWithAlertStyle:(PopoAlertControllerStyle)style custom:(id<PopoAlertContentProtocol>)viewController {
-    if (self = [super init]) {
-        _alertStyle = style;
-        _viewController = viewController;
-        _dimissTapOnTemp_ = style == PopoAlertControllerStyleSheet;
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
     }
     return self;
 }
@@ -613,7 +543,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
     return maker;
 }
 
-<<<<<<< HEAD
 - (void (^)(id _Nonnull))presentFrom {
     void (^maker)(id) = ^(id from) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -629,23 +558,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
             if (self.alertStyle == PopoAlertControllerStyleSheet) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.title_ message:self.message_ preferredStyle:UIAlertControllerStyleActionSheet];
                 
-=======
-/// 默认是点击空白处不会消失的
-- (PopoAlertMaker * (^)(BOOL))dimissTapOnTemp {
-    PopoAlertMaker *(^maker)(BOOL) = ^PopoAlertMaker *(BOOL x) {
-        self.dimissTapOnTemp_ = x;
-        return self;
-    };
-    return maker;
-}
-
-- (void (^)(UIViewController * _Nonnull))presentFrom {
-    void (^maker)(UIViewController *) = ^(UIViewController *x) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.alertStyle == PopoAlertControllerStyleSheet) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.title_ message:self.message_ preferredStyle:UIAlertControllerStyleActionSheet];
-                BOOL hasCancel = NO;
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
                 for (int i = 0; i < self.actions.count; i++) {
                     PopoAlertAction *a = self.actions[i];
                     UIAlertActionStyle style = UIAlertActionStyleDefault;
@@ -657,10 +569,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
                         
                     } else {
                         style = UIAlertActionStyleCancel;
-<<<<<<< HEAD
-=======
-                        hasCancel = YES;
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
                     }
                     UIAlertAction *action = [UIAlertAction actionWithTitle:a.title style:style handler:^(UIAlertAction * _Nonnull action) {
                         if (a.action) {
@@ -669,16 +577,10 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
                     }];
                     [alert addAction:action];
                 }
-<<<<<<< HEAD
                 
                 UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
                 [alert addAction:cancel];
                 
-=======
-                if (!hasCancel) {
-                    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-                }
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
                 float delay = 0;
                 if (x.presentedViewController) {
                     delay = kPresentDelay;
@@ -717,7 +619,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
                 });
             } else {
                 // custom alert
-<<<<<<< HEAD
                 if ([self.customAlert isKindOfClass:[UIViewController class]]) {
                     if ([self.customAlert respondsToSelector:@selector(initWithTitle:message:actions:)]) {
                         self.customAlert = [self.customAlert initWithTitle:self.title_ message:self.message_ actions:self.actions.copy];
@@ -744,25 +645,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
                     self.viewTransition.animationStyle = self.animationStyle_;
                     [self.viewTransition show];
                 }
-=======
-                if (![self.viewController isKindOfClass:[UIViewController class]]) {
-                    return;
-                }
-                if ([self.viewController respondsToSelector:@selector(initWithTitle:message:actions:)]) {
-                    self.viewController = [self.viewController initWithTitle:self.title_ message:self.message_ actions:self.actions.copy];
-                }
-                UIViewController *alert = (UIViewController *)self.viewController;
-                self.presentTransition = [[PopoPresentTransition alloc] initWithPresentedViewController:alert presentingViewController:x style:self.alertStyle];
-                self.presentTransition.dismissTapOnTemp = self.dimissTapOnTemp_;
-                float delay = 0;
-                if (x.presentedViewController) {
-                    delay = kPresentDelay;
-                }
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    alert.transitioningDelegate = self.presentTransition;
-                    [[self getp_vcFrom:x] presentViewController:alert animated:YES completion:nil];
-                });
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
             }
         });
     };
@@ -783,11 +665,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
 
 @end
 
-<<<<<<< HEAD
-=======
-#pragma mark - Custom
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
-
 @implementation PopoAlertMaker (PopoAlertCustom)
 
 + (PopoAlertCustom)custom {
@@ -797,7 +674,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
     };
 }
 
-<<<<<<< HEAD
 /// 默认是点击空白处不会消失的
 - (PopoAlertMaker * (^)(BOOL))dimissTapOnTemp {
     PopoAlertMaker *(^maker)(BOOL) = ^PopoAlertMaker *(BOOL x) {
@@ -815,8 +691,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
     return maker;
 }
 
-=======
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
 @end
 
 #pragma mark - Controller Present caegory
@@ -824,15 +698,7 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
 @implementation UIViewController (PopoAlertPresent)
 
 - (PopoAlertMaker *)popo_alertMaker {
-<<<<<<< HEAD
     PopoAlertMaker *maker = [[PopoAlertMaker alloc] initWithAlertStyle:PopoAlertControllerStyleCustom custom:(id<PopoAlertContentProtocol>)self];
-=======
-    PopoAlertMaker *maker = objc_getAssociatedObject(self, _cmd);
-    if (!maker) {
-        maker = [[PopoAlertMaker alloc] initWithAlertStyle:PopoAlertControllerStyleCustom custom:(id<PopoAlertContentProtocol>)self];
-        objc_setAssociatedObject(self, _cmd, maker, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
     return maker;
 }
 
@@ -853,7 +719,6 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
     }];
 }
 
-<<<<<<< HEAD
 - (void)popo_setNeedsUpdateFrameOfContentViewWithAnimate:(BOOL)animate {
     if ([self respondsToSelector:@selector(frameForViewContent)]) {
         objc_setAssociatedObject(self, kSetNeedsUpdateFrameKey, @(animate), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -893,8 +758,3 @@ static char *kCustomAlertBindViewTransitionKey = "kCustomAlertBindViewTransition
 @implementation PopoAlertMaker (PopoCustomImpl)
 
 @end
-
-
-=======
-@end
->>>>>>> 01fbdfe5a175c31f56212f0947386a4913a0fcf7
